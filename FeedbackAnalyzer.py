@@ -1,5 +1,6 @@
 import os
 import re
+import time
 from openai import AzureOpenAI
 
 
@@ -45,11 +46,19 @@ def EvaluateLeadershipFeedback(TalentFeedback: str, AttributeName: str, Attribut
         "Substring: <complete sentence or 'N/A'>"
     )
 
-    StageOneResponse = AzureClient.chat.completions.create(
-        messages=[{"role": "user", "content": StageOnePrompt}],
-        model=DeploymentName,
-        temperature=0.2,
-    )
+    StageOneResponse = None
+    for Attempt in range(25):
+        try:
+            StageOneResponse = AzureClient.chat.completions.create(
+                messages=[{"role": "user", "content": StageOnePrompt}],
+                model=DeploymentName,
+                temperature=0.2,
+            )
+            break
+        except Exception as Error:
+            if Attempt == 24:
+                raise
+            time.sleep(1)
     StageOneContent = StageOneResponse.choices[0].message.content
 
     RelevantMatch = re.search(r"Relevant:\s*(Yes|No)", StageOneContent, re.IGNORECASE)
@@ -72,11 +81,19 @@ def EvaluateLeadershipFeedback(TalentFeedback: str, AttributeName: str, Attribut
             "Respond in this format:\n"
             "Classification: <Compliment or Feedback for Development>"
         )
-        StageTwoResponse = AzureClient.chat.completions.create(
-            messages=[{"role": "user", "content": StageTwoPrompt}],
-            model=DeploymentName,
-            temperature=0.2,
-        )
+        StageTwoResponse = None
+        for Attempt in range(25):
+            try:
+                StageTwoResponse = AzureClient.chat.completions.create(
+                    messages=[{"role": "user", "content": StageTwoPrompt}],
+                    model=DeploymentName,
+                    temperature=0.2,
+                )
+                break
+            except Exception as Error:
+                if Attempt == 24:
+                    raise
+                time.sleep(1)
         StageTwoContent = StageTwoResponse.choices[0].message.content
 
         ClassificationMatch = re.search(

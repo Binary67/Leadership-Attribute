@@ -1,6 +1,7 @@
 # Implementation of rating evaluation for leadership feedback
 import os
 import re
+import time
 from typing import Tuple
 from openai import AzureOpenAI
 
@@ -93,11 +94,19 @@ def GetLeadershipAttributeRating(
     )
     DeploymentName = os.getenv("AZURE_OPENAI_DEPLOYMENT")
 
-    Response = AzureClient.chat.completions.create(
-        messages=[{"role": "user", "content": Prompt}],
-        model=DeploymentName,
-        temperature=0,
-    )
+    Response = None
+    for Attempt in range(25):
+        try:
+            Response = AzureClient.chat.completions.create(
+                messages=[{"role": "user", "content": Prompt}],
+                model=DeploymentName,
+                temperature=0,
+            )
+            break
+        except Exception as Error:
+            if Attempt == 24:
+                raise
+            time.sleep(1)
     Content = Response.choices[0].message.content
 
     RatingMatch = re.search(r"Rating:\s*(\d)", Content)
