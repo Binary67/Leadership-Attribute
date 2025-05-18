@@ -1,5 +1,5 @@
 import os
-from concurrent.futures import ProcessPoolExecutor
+from concurrent.futures import ThreadPoolExecutor
 from openai import AzureOpenAI
 import pandas as pd
 import numpy as np
@@ -107,7 +107,7 @@ def RateRow(Row: dict) -> Tuple[int, str]:
     )
 
 
-with ProcessPoolExecutor() as Executor:
+with ThreadPoolExecutor() as Executor:
     EvaluationResults = list(
         tqdm(Executor.map(EvaluateRow, Data.to_dict("records")), total=len(Data))
     )
@@ -119,7 +119,7 @@ Data[["IsRelevant", "RelevantSubstring", "IsCompliment"]] = pd.DataFrame(
 
 _RATING_DATA = _LoadRatingDefinitions()
 
-with ProcessPoolExecutor() as Executor:
+with ThreadPoolExecutor() as Executor:
     RatingResults = list(
         tqdm(Executor.map(RateRow, Data.to_dict("records")), total=len(Data))
     )
