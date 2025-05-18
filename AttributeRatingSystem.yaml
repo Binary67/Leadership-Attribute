@@ -1,0 +1,455 @@
+Ambiguity & Tolerance:
+  Rating 1: Unsatisfactory - Demonstrates significant discomfort with uncertainty;
+    becomes visibly stressed and unable to function effectively when faced with ambiguous
+    situations. Requires explicit direction and struggles to make decisions without
+    complete information.
+  Rating 2: Needs Improvement - Shows limited tolerance for ambiguity; tends to become
+    frustrated when faced with unclear situations. Often seeks unnecessary levels
+    of clarification before taking action, slowing team progress.
+  Rating 3: Proficient - Demonstrates adequate tolerance for ambiguity in typical
+    business situations. Can function effectively with some uncertainty and make reasonable
+    decisions with incomplete information when necessary.
+  Rating 4: Strong Performer - Navigates ambiguous situations with confidence. Effectively
+    manages team through uncertainty, making sound decisions despite incomplete information.
+    Helps others become comfortable with ambiguity.
+  Rating 5: Role Model - Excels in ambiguous environments, turning uncertainty into
+    strategic advantage. Creates clarity for the organization during times of change.
+    Coaches others to thrive in uncertain conditions and make confident decisions
+    with limited information.
+Risk Tolerant:
+  Rating 1: Unsatisfactory - Avoids all risk, even when necessary for business growth.
+    Decision paralysis occurs when any uncertainty is present. Misses critical opportunities
+    due to excessive caution.
+  Rating 2: Needs Improvement - Takes minimal risks, even when the potential benefits
+    clearly outweigh potential downsides. Often delays decisions to avoid potential
+    failure, impacting business agility.
+  Rating 3: Proficient - Takes calculated risks when appropriate. Conducts adequate
+    assessment before making decisions involving uncertainty. Balances caution with
+    business needs.
+  Rating 4: Strong Performer - Confidently takes smart risks to drive business results.
+    Thoroughly assesses potential outcomes and creates mitigation strategies. Encourages
+    appropriate risk-taking in team members.
+  Rating 5: Role Model - Demonstrates exemplary risk intelligence; knows precisely
+    when to take bold risks that lead to significant business advantages. Creates
+    an environment where calculated risk-taking is valued and rewarded. Develops comprehensive
+    risk frameworks that become organizational best practices.
+Ambition:
+  Rating 1: Unsatisfactory - Shows no drive to improve or advance. Consistently settles
+    for minimum expectations and avoids challenging goals. Shows little interest in
+    personal or professional growth.
+  Rating 2: Needs Improvement - Occasionally demonstrates ambition but lacks consistency.
+    Sets modest goals that rarely stretch capabilities. Limited evidence of desire
+    to take on greater responsibilities.
+  Rating 3: Proficient - Sets appropriate challenging goals for self and achieves
+    them consistently. Shows interest in advancement and professional development.
+    Takes opportunities to expand responsibilities when offered.
+  Rating 4: Strong Performer - Proactively seeks challenging goals that advance organizational
+    objectives. Consistently looks for ways to expand impact and influence. Demonstrates
+    clear career progression plans aligned with business needs.
+  Rating 5: Role Model - Sets ambitious goals that transform the business while inspiring
+    others. Creates new paths for organizational success through personal ambition.
+    Balances personal ambition with organizational needs masterfully, creating opportunities
+    for others to advance.
+Collaborative:
+  Rating 1: Unsatisfactory - Works in isolation despite team requirements. Creates
+    friction when collaboration is necessary. Withholds information that would benefit
+    colleagues and the organization.
+  Rating 2: Needs Improvement - Collaborates when explicitly directed but prefers
+    independent work. Minimal contribution in group settings. Limited willingness
+    to share resources, information, or expertise with others.
+  Rating 3: Proficient - Works effectively with others to achieve common goals. Shares
+    information appropriately and contributes meaningfully in team settings. Respects
+    diverse perspectives and supports team decisions.
+  Rating 4: Strong Performer - Actively seeks collaborative opportunities across functions
+    and teams. Leverages the strengths of others to improve outcomes. Facilitates
+    effective communication that enhances team performance.
+  Rating 5: Role Model - Creates collaborative ecosystems that transform organizational
+    effectiveness. Breaks down silos across the enterprise. Implements innovative
+    collaborative methodologies that become best practices. Develops high-performing
+    teams through exemplary collaborative leadership.
+Commercially Oriented:
+  Rating 1: Unsatisfactory - Shows no awareness of business implications in decision-making.
+    Consistently ignores financial impact, market conditions, or customer needs. Actions
+    frequently misaligned with commercial objectives.
+  Rating 2: Needs Improvement - Limited consideration of commercial factors when making
+    decisions. Often overlooks opportunities to improve profitability or market position.
+    Requires guidance to connect activities to business outcomes.
+  Rating 3: Proficient - Makes decisions with appropriate consideration of commercial
+    implications. Understands basic market dynamics affecting the business. Aligns
+    work with stated commercial objectives.
+  Rating 4: Strong Performer - Consistently identifies and capitalizes on commercial
+    opportunities. Demonstrates strong understanding of market forces and competitive
+    landscape. Proactively adjusts strategies to maximize business outcomes.
+  Rating 5: Role Model - Exceptional commercial instincts that drive significant business
+    advantage. Anticipates market shifts before competitors. Creates innovative commercial
+    strategies that transform the organization's market position. Develops commercial
+    acumen in others.
+Dependable:
+  Rating 1: Unsatisfactory - Consistently fails to meet commitments. Deadlines are
+    regularly missed without valid reasons. Work quality is unpredictable and requires
+    significant oversight.
+  Rating 2: Needs Improvement - Occasionally fails to deliver on commitments. Needs
+    frequent reminders to complete tasks on time. Inconsistent in following through
+    on promises to team members and stakeholders.
+  Rating 3: Proficient - Reliably meets commitments and deadlines. Delivers work that
+    meets quality standards consistently. Can be counted on to follow through on responsibilities
+    without excessive supervision.
+  Rating 4: Strong Performer - Consistently delivers high-quality results ahead of
+    schedule. Proactively communicates potential delays and develops mitigation plans.
+    Builds trust through unwavering reliability.
+  Rating 5: Role Model - Sets the organizational standard for dependability. Creates
+    systems and processes that enhance reliability across teams. Demonstrates exceptional
+    accountability even in crisis situations. Inspires others to heightened levels
+    of dependability through personal example.
+Dominance:
+  Rating 1: Unsatisfactory - Unable to assert position in any situation. Consistently
+    yields to others even when detrimental to business outcomes. Avoids leadership
+    opportunities entirely.
+  Rating 2: Needs Improvement - Struggles to maintain position when challenged. Inconsistent
+    in asserting authority when appropriate. Often overshadowed in group settings
+    where leadership is needed.
+  Rating 3: Proficient - Appropriately assertive in most business situations. Can
+    influence outcomes when necessary. Maintains composure when challenged and defends
+    positions effectively.
+  Rating 4: Strong Performer - Confidently leads in challenging situations. Effectively
+    balances assertiveness with inclusivity. Skillfully navigates complex power dynamics
+    to achieve organizational goals.
+  Rating 5: Role Model - Commands respect through presence and expertise rather than
+    position. Exemplifies situational leadership, knowing precisely when to assert
+    authority and when to empower others. Develops assertiveness skills in team members.
+    Creates an environment where influence is based on merit rather than hierarchy.
+Driven:
+  Rating 1: Unsatisfactory - Shows no internal motivation to achieve results. Requires
+    constant supervision to complete basic tasks. Demonstrates minimal effort and
+    initiative.
+  Rating 2: Needs Improvement - Demonstrates inconsistent drive. Motivation fluctuates
+    significantly depending on task or circumstance. Often needs external pressure
+    to maintain momentum.
+  Rating 3: Proficient - Shows consistent motivation to achieve expected results.
+    Maintains steady effort through normal business challenges. Demonstrates appropriate
+    initiative in familiar situations.
+  Rating 4: Strong Performer - Highly self-motivated with persistent drive to exceed
+    expectations. Maintains momentum through significant obstacles. Energizes others
+    through personal example of determination.
+  Rating 5: Role Model - Exemplifies extraordinary drive that inspires organization-wide
+    excellence. Demonstrates relentless pursuit of ambitious goals despite formidable
+    challenges. Creates systems that foster drive and determination in others. Sets
+    new standards for achievement that elevate organizational performance.
+Empathetic:
+  Rating 1: Unsatisfactory - Shows consistent inability to consider others' perspectives
+    or feelings. Creates negative experiences for colleagues and stakeholders. Dismisses
+    emotional aspects of workplace dynamics.
+  Rating 2: Needs Improvement - Limited awareness of others' emotional states. Occasionally
+    misreads situations due to lack of empathy. Focuses primarily on tasks while neglecting
+    the human element of interactions.
+  Rating 3: Proficient - Demonstrates appropriate empathy in most workplace interactions.
+    Considers emotional impact when communicating. Responds effectively to colleagues'
+    concerns and perspectives.
+  Rating 4: Strong Performer - Highly attuned to others' emotional states and perspectives.
+    Proactively addresses emotional dynamics in team settings. Leverages empathy to
+    build strong relationships and resolve conflicts effectively.
+  Rating 5: Role Model - Creates an empathy-driven culture that transforms organizational
+    effectiveness. Demonstrates exceptional ability to understand and address diverse
+    perspectives. Uses empathetic leadership to navigate complex organizational change.
+    Develops empathy as a core competency across teams.
+Expressive:
+  Rating 1: Unsatisfactory - Unable to articulate thoughts clearly. Communication
+    consistently creates confusion. Avoids expressing ideas or opinions in group settings.
+  Rating 2: Needs Improvement - Communication is often unclear or ineffective. Limited
+    ability to adjust communication style to audience needs. Struggles to express
+    complex ideas or emotions appropriately.
+  Rating 3: Proficient - Communicates ideas clearly in most business situations. Adapts
+    communication style to different audiences appropriately. Expresses thoughts and
+    feelings in a professional manner.
+  Rating 4: Strong Performer - Excellent communicator across various channels and
+    contexts. Articulates complex ideas with clarity and impact. Effectively uses
+    emotional intelligence to enhance expressiveness.
+  Rating 5: Role Model - Communication transforms organizational effectiveness. Creates
+    new standards for clear, compelling expression. Develops innovative communication
+    approaches that become best practices. Coaches others to exceptional levels of
+    expressiveness and impact.
+Forward Thinking:
+  Rating 1: Unsatisfactory - Focused entirely on immediate tasks with no consideration
+    of future implications. Repeatedly makes decisions that create long-term problems.
+    Resistant to future planning.
+  Rating 2: Needs Improvement - Limited consideration of long-term implications. Often
+    prioritizes short-term gains at the expense of future opportunities. Struggles
+    to anticipate obvious trends or developments.
+  Rating 3: Proficient - Balances short-term needs with appropriate consideration
+    of future implications. Identifies relevant trends that may impact work. Plans
+    ahead for predictable developments.
+  Rating 4: Strong Performer - Consistently anticipates future developments and positions
+    team for success. Creates strategic plans that address emerging opportunities
+    and challenges. Helps others understand and prepare for future scenarios.
+  Rating 5: Role Model - Extraordinary foresight that creates significant competitive
+    advantage. Anticipates industry disruptions before competitors. Develops innovative
+    approaches to future planning that become organizational standards. Creates a
+    culture of forward thinking across teams.
+Problem Solving:
+  Rating 1: Unsatisfactory - Unable to identify or address basic problems. Frequently
+    escalates issues without attempting solutions. Problem-solving approach lacks
+    any discernible structure or logic.
+  Rating 2: Needs Improvement - Addresses obvious problems but misses underlying issues.
+    Applies simplistic solutions that often fail to resolve root causes. Limited analytical
+    approach to complex challenges.
+  Rating 3: Proficient - Effectively solves routine problems using appropriate methods.
+    Analyzes issues systematically to identify root causes. Implements reasonable
+    solutions that address core issues.
+  Rating 4: Strong Performer - Tackles complex problems with innovative approaches.
+    Anticipates potential issues before they become critical. Develops effective solutions
+    that consider multiple stakeholder needs.
+  Rating 5: Role Model - Creates breakthrough solutions to seemingly intractable problems.
+    Develops problem-solving methodologies that become organizational best practices.
+    Builds exceptional problem-solving capability in teams. Transforms organizational
+    challenges into strategic advantages.
+Innovative:
+  Rating 1: Unsatisfactory - Rejects new ideas and approaches. Rigidly adheres to
+    outdated methods despite clear evidence of ineffectiveness. Creates barriers to
+    innovation within the team.
+  Rating 2: Needs Improvement - Occasionally adopts new ideas but rarely initiates
+    innovation. Implements incremental improvements when directed. Limited willingness
+    to experiment with new approaches.
+  Rating 3: Proficient - Open to new ideas and implements improvements to existing
+    processes. Contributes useful suggestions to enhance team effectiveness. Willing
+    to experiment within established parameters.
+  Rating 4: Strong Performer - Regularly generates valuable new ideas and approaches.
+    Proactively seeks opportunities for innovation. Creates an environment where creative
+    thinking is encouraged and rewarded.
+  Rating 5: Role Model - Drives transformative innovation that creates significant
+    business advantage. Develops breakthrough approaches that redefine industry standards.
+    Creates systems that foster innovation across the organization. Demonstrates exceptional
+    creativity balanced with pragmatic implementation.
+Judgement:
+  Rating 1: Unsatisfactory - Consistently makes poor decisions that harm business
+    outcomes. Unable to evaluate situations objectively. Decision-making appears random
+    or based on irrelevant factors.
+  Rating 2: Needs Improvement - Judgment is unreliable, especially under pressure.
+    Often overlooks important factors when making decisions. Struggles to balance
+    competing priorities effectively.
+  Rating 3: Proficient - Makes sound decisions in most business situations. Considers
+    relevant factors and consults appropriate stakeholders. Demonstrates reasonable
+    judgment when facing typical challenges.
+  Rating 4: Strong Performer - Consistently demonstrates excellent judgment, even
+    in complex situations. Effectively weighs multiple factors and anticipates consequences.
+    Makes difficult decisions confidently when needed.
+  Rating 5: Role Model - Exceptional judgment that drives strategic advantage. Makes
+    critical decisions with remarkable insight and precision. Creates decision-making
+    frameworks that enhance organizational effectiveness. Develops strong judgment
+    capabilities in others.
+Evaluative:
+  Rating 1: Unsatisfactory - Unable to assess situations or outcomes objectively.
+    Evaluations consistently miss critical factors. Avoids making evaluative assessments
+    entirely.
+  Rating 2: Needs Improvement - Evaluations often lack depth or comprehensiveness.
+    Overlooks important factors when assessing situations. Inconsistent in applying
+    evaluation criteria.
+  Rating 3: Proficient - Conducts thorough evaluations of typical business situations.
+    Applies appropriate criteria consistently. Provides reasonable assessments that
+    guide decision-making.
+  Rating 4: Strong Performer - Demonstrates sophisticated evaluation skills across
+    various contexts. Identifies subtle factors that others miss. Creates effective
+    evaluation frameworks that enhance team performance.
+  Rating 5: Role Model - Exceptional evaluative capabilities that drive strategic
+    advantage. Develops innovative assessment approaches that become organizational
+    standards. Creates a culture of thoughtful evaluation. Coaches others to develop
+    advanced evaluative skills.
+Structured:
+  Rating 1: Unsatisfactory - Work is consistently disorganized and chaotic. Unable
+    to create or follow basic processes. Approach creates inefficiency and confusion
+    for others.
+  Rating 2: Needs Improvement - Organization is inconsistent. Creates structures for
+    simple tasks but struggles with complexity. Often fails to implement or maintain
+    necessary systems.
+  Rating 3: Proficient - Maintains appropriate organization and structure in most
+    situations. Creates and follows reasonable processes. Work is generally orderly
+    and systematic.
+  Rating 4: Strong Performer - Highly organized with effective systems for managing
+    complex work. Creates efficient processes that enhance team productivity. Helps
+    others develop effective organizational approaches.
+  Rating 5: Role Model - Creates organizational systems that transform business effectiveness.
+    Develops innovative approaches to structure that become best practices. Balances
+    structure with flexibility masterfully. Builds a culture of effective organization
+    across teams.
+Conceptual:
+  Rating 1: Unsatisfactory - Unable to understand abstract concepts or see patterns.
+    Focuses exclusively on concrete details without comprehension of broader implications.
+    Misses obvious connections between ideas.
+  Rating 2: Needs Improvement - Limited ability to work with concepts or recognize
+    patterns. Often struggles to connect tactical activities to strategic objectives.
+    Needs significant guidance to understand conceptual frameworks.
+  Rating 3: Proficient - Demonstrates adequate conceptual thinking in most business
+    situations. Recognizes relevant patterns and relationships. Can connect operational
+    activities to broader objectives.
+  Rating 4: Strong Performer - Strong conceptual thinker who readily identifies patterns
+    and relationships. Creates useful frameworks that organize complex information.
+    Helps others understand abstract concepts through effective explanation.
+  Rating 5: Role Model - Exceptional conceptual thinking that creates strategic advantage.
+    Develops innovative frameworks that transform organizational understanding. Sees
+    patterns and connections that others miss entirely. Builds conceptual thinking
+    capability in teams.
+Reactive:
+  Rating 1: Unsatisfactory - Extremely slow to respond to changing conditions. Fails
+    to adapt when circumstances clearly require it. Response to urgent situations
+    is inadequate or nonexistent.
+  Rating 2: Needs Improvement - Responses to changing situations are often delayed
+    or ineffective. Struggles to adjust priorities when circumstances change. Reactivity
+    is inconsistent, especially under pressure.
+  Rating 3: Proficient - Responds appropriately to changing situations and new information.
+    Adjusts approach when circumstances require. Manages unexpected developments effectively
+    in most cases.
+  Rating 4: Strong Performer - Highly responsive to changing conditions. Quickly adjusts
+    strategies based on new information. Effectively manages rapidly evolving situations
+    while maintaining focus on objectives.
+  Rating 5: Role Model - Demonstrates exceptional situational responsiveness that
+    creates competitive advantage. Anticipates need for changes before they become
+    urgent. Creates systems that enable organizational agility. Coaches others to
+    develop advanced responsive capabilities.
+Quality Focused:
+  Rating 1: Unsatisfactory - Consistently delivers substandard work. Shows no concern
+    for quality or accuracy. Resists implementing quality standards or feedback.
+  Rating 2: Needs Improvement - Quality of work is inconsistent. Meets minimum standards
+    but rarely exceeds them. Attention to detail fluctuates significantly depending
+    on task or circumstance.
+  Rating 3: Proficient - Delivers work that consistently meets established quality
+    standards. Pays appropriate attention to detail. Implements quality feedback effectively.
+  Rating 4: Strong Performer - Consistently delivers high-quality work that exceeds
+    standards. Identifies and addresses quality issues proactively. Helps establish
+    higher quality benchmarks for the team.
+  Rating 5: Role Model - Sets new standards for quality that transform organizational
+    effectiveness. Develops innovative quality assurance approaches that become best
+    practices. Creates a culture where excellence is the only acceptable standard.
+    Coaches others to exceptional levels of quality focus.
+Learning Agility:
+  Rating 1: Unsatisfactory - Resistant to learning new skills or approaches. Unable
+    to adapt to changing requirements. Shows no interest in personal or professional
+    development.
+  Rating 2: Needs Improvement - Slow to acquire new skills or knowledge. Limited adaptability
+    to new situations. Struggles to apply learning from one context to another.
+  Rating 3: Proficient - Learns new skills and information at an appropriate pace.
+    Adapts reasonably well to changing circumstances. Shows interest in continuing
+    professional development.
+  Rating 4: Strong Performer - Rapidly acquires and applies new knowledge and skills.
+    Demonstrates high adaptability across diverse situations. Proactively seeks learning
+    opportunities that enhance effectiveness.
+  Rating 5: Role Model - Extraordinary learning agility that creates significant competitive
+    advantage. Masters complex skills with remarkable speed. Creates innovative learning
+    approaches that become organizational standards. Builds exceptional learning culture
+    across teams.
+Mood Stability:
+  Rating 1: Unsatisfactory - Emotional responses are unpredictable and often inappropriate.
+    Creates a disruptive atmosphere through mood volatility. Unable to maintain composure
+    in routine challenging situations.
+  Rating 2: Needs Improvement - Emotional stability is inconsistent, especially under
+    pressure. Occasional inappropriate emotional displays affect team dynamics. Struggles
+    to maintain composure during moderate challenges.
+  Rating 3: Proficient - Maintains appropriate emotional stability in most business
+    situations. Responds to challenges with reasonable composure. Emotional responses
+    are generally professional and appropriate.
+  Rating 4: Strong Performer - Demonstrates consistent emotional stability even in
+    highly challenging situations. Provides a calming influence during times of stress.
+    Effectively manages personal emotions to maintain productive environment.
+  Rating 5: Role Model - Exceptional emotional stability that enhances organizational
+    resilience. Maintains composed, constructive presence during crises. Creates psychological
+    safety through consistent, measured responses. Coaches others in emotional regulation
+    techniques.
+Motivating:
+  Rating 1: Unsatisfactory - Unable to inspire or encourage others. Creates an atmosphere
+    that diminishes team morale and engagement. Approach actively demotivates team
+    members.
+  Rating 2: Needs Improvement - Limited ability to motivate others. Occasionally inspires
+    individual effort but struggles to sustain team motivation. Misses opportunities
+    to recognize or encourage strong performance.
+  Rating 3: Proficient - Effectively motivates team members in most situations. Provides
+    appropriate recognition and encouragement. Creates generally positive atmosphere
+    that supports engagement.
+  Rating 4: Strong Performer - Highly effective at inspiring individuals and teams.
+    Creates sustained motivation through thoughtful recognition and challenge. Tailors
+    motivational approach to individual needs and preferences.
+  Rating 5: Role Model - Extraordinary ability to inspire exceptional performance
+    across the organization. Creates motivational systems that become best practices.
+    Transforms organizational culture through authentic, powerful inspiration. Develops
+    motivational capabilities in other leaders.
+Openness:
+  Rating 1: Unsatisfactory - Closed to new ideas, feedback, or perspectives. Rigidly
+    maintains positions despite contrary evidence. Creates an environment where others
+    are hesitant to share thoughts.
+  Rating 2: Needs Improvement - Demonstrates limited openness to new ideas or feedback.
+    Receptive in some situations but resistant in others. Selective in considering
+    perspectives that differ from own.
+  Rating 3: Proficient - Appropriately open to new ideas and perspectives in most
+    situations. Considers feedback constructively. Willing to change position when
+    presented with compelling evidence.
+  Rating 4: Strong Performer - Highly receptive to diverse perspectives and approaches.
+    Actively seeks feedback and new ideas. Creates an environment where open exchange
+    is encouraged and valued.
+  Rating 5: Role Model - Creates a culture of openness that transforms organizational
+    effectiveness. Demonstrates exceptional receptivity to diverse perspectives even
+    when challenging personal views. Develops systems that ensure all voices are heard
+    and valued. Coaches others to develop greater openness.
+Persuasive:
+  Rating 1: Unsatisfactory - Unable to influence others' thinking or actions. Communication
+    lacks compelling elements. Attempts at persuasion often produce opposite of intended
+    effect.
+  Rating 2: Needs Improvement - Limited persuasive capability. Occasionally influences
+    straightforward situations but struggles with resistance or complexity. Approach
+    lacks adaptability to different audiences.
+  Rating 3: Proficient - Effectively persuades others in most business situations.
+    Presents arguments with appropriate supporting evidence. Adapts approach based
+    on audience needs and concerns.
+  Rating 4: Strong Performer - Highly persuasive across various contexts and audiences.
+    Skillfully addresses objections and concerns. Builds compelling cases that drive
+    action and change perspectives.
+  Rating 5: Role Model - Extraordinary persuasive capabilities that drive organizational
+    transformation. Influences even in most challenging circumstances. Develops innovative
+    persuasive approaches that become best practices. Coaches others to enhance their
+    influence effectively.
+Service Orientation:
+  Rating 1: Unsatisfactory - Shows no concern for customer or stakeholder needs. Repeatedly
+    fails to meet basic service expectations. Approach creates negative experiences
+    for those served.
+  Rating 2: Needs Improvement - Inconsistent attention to service quality. Sometimes
+    meets basic expectations but fails to anticipate needs. Limited understanding
+    of stakeholder requirements.
+  Rating 3: Proficient - Consistently meets service expectations of customers and
+    stakeholders. Responds appropriately to expressed needs. Maintains professional
+    service approach in most situations.
+  Rating 4: Strong Performer - Exceeds service expectations consistently. Anticipates
+    needs before they are expressed. Creates positive experiences that build loyalty
+    and trust.
+  Rating 5: Role Model - Creates service experiences that transform stakeholder relationships.
+    Develops innovative service approaches that become organizational standards. Builds
+    exceptional service culture across teams. Balances service excellence with business
+    requirements masterfully.
+Sociable:
+  Rating 1: Unsatisfactory - Avoids interaction with colleagues and stakeholders.
+    Creates barriers to effective relationships. Communication style actively discourages
+    connection.
+  Rating 2: Needs Improvement - Limited engagement in professional social interactions.
+    Forms relationships with select individuals but struggles to build broader networks.
+    Networking skills are underdeveloped.
+  Rating 3: Proficient - Builds appropriate professional relationships in most contexts.
+    Engages effectively in typical workplace social situations. Maintains adequate
+    professional network.
+  Rating 4: Strong Performer - Builds strong, productive relationships across diverse
+    groups. Networks effectively both internally and externally. Creates connections
+    that enhance business outcomes.
+  Rating 5: Role Model - Exceptional relationship-building skills that create strategic
+    advantage. Develops powerful networks that transform organizational effectiveness.
+    Creates inclusive social environments where diverse connections flourish. Coaches
+    others to enhance relationship capabilities.
+Trusting:
+  Rating 1: Unsatisfactory - Demonstrates pervasive distrust of colleagues and stakeholders.
+    Creates atmosphere of suspicion. Unable to delegate effectively due to lack of
+    trust.
+  Rating 2: Needs Improvement - Shows limited trust in others' capabilities or intentions.
+    Inconsistent in extending trust appropriately. Over-monitors delegated work, undermining
+    confidence.
+  Rating 3: Proficient - Extends appropriate trust in most business relationships.
+    Delegates with reasonable oversight. Maintains balanced approach to trusting intentions
+    and capabilities.
+  Rating 4: Strong Performer - Demonstrates high trust in team members and colleagues.
+    Creates environment where trust flourishes. Delegates effectively with appropriate
+    autonomy.
+  Rating 5: Role Model - Creates culture of trust that transforms organizational effectiveness.
+    Balances trust with accountability masterfully. Rebuilds trust effectively when
+    broken. Develops trust-building capabilities in other leaders.
