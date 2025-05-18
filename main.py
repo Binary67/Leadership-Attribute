@@ -1,4 +1,5 @@
 import os
+from concurrent.futures import ProcessPoolExecutor
 from openai import AzureOpenAI
 import pandas as pd
 import numpy as np
@@ -86,14 +87,43 @@ def ExpandTalentFeedback(DataFrameInput: pd.DataFrame,
 
     return ExpandedDF
   
+
 Data = ExpandTalentFeedback(Data, dict_27Attributes)
-Data['IsRelevant'], Data['RelevantSubstring'], Data['IsCompliment'] = zip(*Data.progress_apply(lambda row: 
-                                                                                               EvaluateLeadershipFeedback(row['feedback_extracted'], 
-                                                                                                                          row['AttributeName'], 
-                                                                                                                          row['AttributeDefinition']), axis=1))
+
+
+def EvaluateRow(Row: dict) -> Tuple[bool, str, bool]:
+    return EvaluateLeadershipFeedback(
+        Row["feedback_extracted"], Row["AttributeName"], Row["AttributeDefinition"]
+    )
+
+
+def RateRow(Row: dict) -> Tuple[int, str]:
+    return GetLeadershipAttributeRating(
+        Row["feedback_extracted"],
+        Row["AttributeName"],
+        Row["IsRelevant"],
+        Row["RelevantSubstring"],
+        Row["IsCompliment"],
+    )
+
+
+with ProcessPoolExecutor() as Executor:
+    EvaluationResults = list(
+        tqdm(Executor.map(EvaluateRow, Data.to_dict("records")), total=len(Data))
+    )
+
+Data[["IsRelevant", "RelevantSubstring", "IsCompliment"]] = pd.DataFrame(
+    EvaluationResults,
+    columns=["IsRelevant", "RelevantSubstring", "IsCompliment"],
+)
+
 _RATING_DATA = _LoadRatingDefinitions()
-Data['Rating'], Data['Justification'] = zip(*Data.progress_apply(lambda row: GetLeadershipAttributeRating(row['feedback_extracted'],
-                                                                                                          row['AttributeName'], 
-                                                                                                          row['IsRelevant'], 
-                                                                                                          row['RelevantSubstring'], 
-                                                                                                          row['IsCompliment']), axis=1))
+
+with ProcessPoolExecutor() as Executor:
+    RatingResults = list(
+        tqdm(Executor.map(RateRow, Data.to_dict("records")), total=len(Data))
+    )
+
+Data[["Rating", "Justification"]] = pd.DataFrame(
+    RatingResults, columns=["Rating", "Justification"]
+)
