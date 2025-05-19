@@ -46,62 +46,78 @@ def EvaluateLeadershipFeedback(TalentFeedback: str, AttributeName: str, Attribut
         "Substring: <complete sentence or 'N/A'>"
     )
 
-    StageOneResponse = None
-    for Attempt in range(25):
+    for OverallAttempt in range(25):
         try:
-            StageOneResponse = AzureClient.chat.completions.create(
-                messages=[{"role": "user", "content": StageOnePrompt}],
-                model=DeploymentName,
-                temperature=0.2,
-            )
-            break
+            StageOneResponse = None
+            StageOneContent = None
+            IsRelevant = False
+            RelevantSubstring = ""
+
+            for StageOneAttempt in range(25):
+                try:
+                    StageOneResponse = AzureClient.chat.completions.create(
+                        messages=[{"role": "user", "content": StageOnePrompt}],
+                        model=DeploymentName,
+                        temperature=0.2,
+                    )
+                    StageOneContent = StageOneResponse.choices[0].message.content
+
+                    RelevantMatch = re.search(
+                        r"Relevant:\s*(Yes|No)", StageOneContent, re.IGNORECASE
+                    )
+                    SubstringMatch = re.search(
+                        r"Substring:\s*(.+)", StageOneContent, re.IGNORECASE
+                    )
+                    if not RelevantMatch or not SubstringMatch:
+                        raise ValueError("Stage one parsing failed")
+
+                    IsRelevant = RelevantMatch.group(1).strip().lower() == "yes"
+                    RelevantSubstring = SubstringMatch.group(1).strip()
+                    break
+                except Exception as Error:
+                    if StageOneAttempt == 24:
+                        raise
+                    time.sleep(1)
+
+            IsCompliment = False
+
+            if IsRelevant and RelevantSubstring:
+                StageTwoPrompt = (
+                    "Classify the following sentence from talent feedback as a compliment or feedback for development.\n\n"
+                    f"Sentence: {RelevantSubstring}\n\n"
+                    "Respond in this format:\n"
+                    "Classification: <Compliment or Feedback for Development>"
+                )
+                StageTwoResponse = None
+
+                for StageTwoAttempt in range(25):
+                    try:
+                        StageTwoResponse = AzureClient.chat.completions.create(
+                            messages=[{"role": "user", "content": StageTwoPrompt}],
+                            model=DeploymentName,
+                            temperature=0.2,
+                        )
+                        StageTwoContent = StageTwoResponse.choices[0].message.content
+                        ClassificationMatch = re.search(
+                            r"Classification:\s*(Compliment|Feedback for Development)",
+                            StageTwoContent,
+                            re.IGNORECASE,
+                        )
+                        if not ClassificationMatch:
+                            raise ValueError("Stage two parsing failed")
+                        IsCompliment = (
+                            ClassificationMatch.group(1).lower() == "compliment"
+                        )
+                        break
+                    except Exception as Error:
+                        if StageTwoAttempt == 24:
+                            raise
+                        time.sleep(1)
+
+            return IsRelevant, RelevantSubstring, IsCompliment
         except Exception as Error:
-            if Attempt == 24:
+            if OverallAttempt == 24:
                 raise
             time.sleep(1)
-    StageOneContent = StageOneResponse.choices[0].message.content
 
-    RelevantMatch = re.search(r"Relevant:\s*(Yes|No)", StageOneContent, re.IGNORECASE)
-    SubstringMatch = re.search(r"Substring:\s*(.+)", StageOneContent, re.IGNORECASE)
-
-    IsRelevant = False
-    RelevantSubstring = ""
-
-    if RelevantMatch:
-        IsRelevant = RelevantMatch.group(1).strip().lower() == "yes"
-    if SubstringMatch:
-        RelevantSubstring = SubstringMatch.group(1).strip()
-
-    IsCompliment = False
-
-    if IsRelevant and RelevantSubstring:
-        StageTwoPrompt = (
-            "Classify the following sentence from talent feedback as a compliment or feedback for development.\n\n"
-            f"Sentence: {RelevantSubstring}\n\n"
-            "Respond in this format:\n"
-            "Classification: <Compliment or Feedback for Development>"
-        )
-        StageTwoResponse = None
-        for Attempt in range(25):
-            try:
-                StageTwoResponse = AzureClient.chat.completions.create(
-                    messages=[{"role": "user", "content": StageTwoPrompt}],
-                    model=DeploymentName,
-                    temperature=0.2,
-                )
-                break
-            except Exception as Error:
-                if Attempt == 24:
-                    raise
-                time.sleep(1)
-        StageTwoContent = StageTwoResponse.choices[0].message.content
-
-        ClassificationMatch = re.search(
-            r"Classification:\s*(Compliment|Feedback for Development)",
-            StageTwoContent,
-            re.IGNORECASE,
-        )
-        if ClassificationMatch:
-            IsCompliment = ClassificationMatch.group(1).lower() == "compliment"
-
-    return IsRelevant, RelevantSubstring, IsCompliment
+    raise RuntimeError("Failed to evaluate leadership feedback after multiple attempts")
