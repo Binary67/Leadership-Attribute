@@ -93,13 +93,13 @@ def EvaluateLeadershipFeedback(TalentFeedback: str, AttributeName: str, Attribut
                     break
                 except Exception as Error:
                     if CombinedAttempt == 24:
-                        raise
+                        return 'Error', 'Error', 'Error', CombinedContent
                     time.sleep(1)
 
             return IsRelevant, RelevantSubstring, IsCompliment
         except Exception as Error:
             if OverallAttempt == 24:
-                raise
+                return 'Error', 'Error', 'Error', CombinedContent
             time.sleep(1)
 
-    raise RuntimeError("Failed to evaluate leadership feedback after multiple attempts")
+    return 'Error', 'Error', 'Error', CombinedContent
