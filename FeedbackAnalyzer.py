@@ -5,12 +5,11 @@ from openai import AzureOpenAI
 
 
 def EvaluateLeadershipFeedback(TalentFeedback: str, AttributeName: str, AttributeDefinition: str):
-    """Evaluate feedback relevance and classify the tone using Azure OpenAI.
+    """Evaluate feedback relevance and tone using a single Azure OpenAI call.
 
-    This function covers Stage 1 and Stage 2 of the project's workflow. It first
-    checks whether ``TalentFeedback`` is relevant to ``AttributeName`` using the
-    provided ``AttributeDefinition`` for context and extracts the most relevant
-    sentence. It then classifies the extracted sentence as either a compliment or
+    The function checks whether ``TalentFeedback`` is relevant to ``AttributeName``
+    using the provided ``AttributeDefinition`` for context and extracts the most
+    relevant sentence. It also classifies that sentence as either a compliment or
     feedback for development.
 
     Parameters
@@ -36,102 +35,66 @@ def EvaluateLeadershipFeedback(TalentFeedback: str, AttributeName: str, Attribut
     )
     DeploymentName = os.getenv("AZURE_OPENAI_DEPLOYMENT")
 
-    StageOneSystemMessage = (
+    CombinedSystemMessage = (
         "You must answer with the exact fields shown and nothing else. "
         "Do not add greetings, explanations, or punctuation."
     )
 
-    StageOnePrompt = (
-        f"You are assessing whether the following feedback is relevant to a leadership attribute.\n\n"
+    CombinedPrompt = (
+        f"You are assessing whether the following feedback is relevant to a leadership attribute and classifying the tone.\n\n"
         f"Leadership Attribute: {AttributeName}\n"
         f"Definition: {AttributeDefinition}\n\n"
         f"Feedback:\n{TalentFeedback}\n\n"
         "Respond only with these lines:\n"
         "Relevant: <Yes or No>\n"
-        "Substring: <complete sentence or 'N/A'>"
+        "Substring: <complete sentence or 'N/A'>\n"
+        "Classification: <Compliment or Feedback for Development or 'N/A'>"
     )
 
     for OverallAttempt in range(25):
         try:
-            StageOneResponse = None
-            StageOneContent = None
-            StageTwoResponse = None
-            StageTwoContent = None
+            CombinedResponse = None
+            CombinedContent = None
             IsRelevant = False
             RelevantSubstring = ""
+            IsCompliment = False
 
-            for StageOneAttempt in range(25):
+            for CombinedAttempt in range(25):
                 try:
-                    StageOneResponse = AzureClient.chat.completions.create(
+                    CombinedResponse = AzureClient.chat.completions.create(
                         messages=[
-                            {"role": "system", "content": StageOneSystemMessage},
-                            {"role": "user", "content": StageOnePrompt},
+                            {"role": "system", "content": CombinedSystemMessage},
+                            {"role": "user", "content": CombinedPrompt},
                         ],
                         model=DeploymentName,
                         temperature=0.2,
                     )
-                    StageOneContent = StageOneResponse.choices[0].message.content
+                    CombinedContent = CombinedResponse.choices[0].message.content
 
                     RelevantMatch = re.search(
                         r"(?im)^Relevant\s*:\s*(Yes|No)\b",
-                        StageOneContent,
+                        CombinedContent,
                     )
                     SubstringMatch = re.search(
                         r"(?im)^Substring\s*:\s*(.+)",
-                        StageOneContent,
+                        CombinedContent,
                     )
-                    if not RelevantMatch or not SubstringMatch:
-                        raise ValueError("Stage one parsing failed")
+                    ClassificationMatch = re.search(
+                        r"(?im)^Classification\s*:\s*(Compliment|Feedback for Development|N/A)\b",
+                        CombinedContent,
+                    )
+                    if not RelevantMatch or not SubstringMatch or not ClassificationMatch:
+                        raise ValueError("Parsing failed")
 
                     IsRelevant = RelevantMatch.group(1).strip().lower() == "yes"
                     RelevantSubstring = SubstringMatch.group(1).strip()
+                    ClassificationValue = ClassificationMatch.group(1).strip().lower()
+                    IsCompliment = ClassificationValue == "compliment"
                     break
                 except Exception as Error:
-                    if StageOneAttempt == 24:
+                    if CombinedAttempt == 24:
                         raise
                     time.sleep(1)
-
-            IsCompliment = False
-
-            if IsRelevant and RelevantSubstring:
-                StageTwoSystemMessage = (
-                    "You must answer with the exact fields shown and nothing else. "
-                    "Do not add greetings, explanations, or punctuation."
-                )
-                StageTwoPrompt = (
-                    "Classify the following sentence from talent feedback as a"
-                    " compliment or feedback for development.\n\n"
-                    f"Sentence: {RelevantSubstring}\n\n"
-                    "Respond only with this line:\n"
-                    "Classification: <Compliment or Feedback for Development>"
-                )
-                StageTwoResponse = None
-
-                for StageTwoAttempt in range(25):
-                    try:
-                        StageTwoResponse = AzureClient.chat.completions.create(
-                            messages=[
-                                {"role": "system", "content": StageTwoSystemMessage},
-                                {"role": "user", "content": StageTwoPrompt},
-                            ],
-                            model=DeploymentName,
-                            temperature=0.2,
-                        )
-                        StageTwoContent = StageTwoResponse.choices[0].message.content
-                        ClassificationMatch = re.search(
-                            r"(?im)^Classification\s*:\s*(Compliment|Feedback for Development)\b",
-                            StageTwoContent,
-                        )
-                        if not ClassificationMatch:
-                            raise ValueError("Stage two parsing failed")
-                        IsCompliment = (
-                            ClassificationMatch.group(1).lower() == "compliment"
-                        )
-                        break
-                    except Exception as Error:
-                        if StageTwoAttempt == 24:
-                            raise
-                        time.sleep(1)
 
             return IsRelevant, RelevantSubstring, IsCompliment
         except Exception as Error:
