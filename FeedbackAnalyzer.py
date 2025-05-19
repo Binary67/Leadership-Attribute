@@ -55,6 +55,8 @@ def EvaluateLeadershipFeedback(TalentFeedback: str, AttributeName: str, Attribut
         try:
             StageOneResponse = None
             StageOneContent = None
+            StageTwoResponse = None
+            StageTwoContent = None
             IsRelevant = False
             RelevantSubstring = ""
 
