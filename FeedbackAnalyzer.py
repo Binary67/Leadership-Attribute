@@ -63,10 +63,12 @@ def EvaluateLeadershipFeedback(TalentFeedback: str, AttributeName: str, Attribut
                     StageOneContent = StageOneResponse.choices[0].message.content
 
                     RelevantMatch = re.search(
-                        r"Relevant:\s*(Yes|No)", StageOneContent, re.IGNORECASE
+                        r"(?im)^Relevant\s*:\s*(Yes|No)\b",
+                        StageOneContent,
                     )
                     SubstringMatch = re.search(
-                        r"Substring:\s*(.+)", StageOneContent, re.IGNORECASE
+                        r"(?im)^Substring\s*:\s*(.+)",
+                        StageOneContent,
                     )
                     if not RelevantMatch or not SubstringMatch:
                         raise ValueError("Stage one parsing failed")
@@ -99,9 +101,8 @@ def EvaluateLeadershipFeedback(TalentFeedback: str, AttributeName: str, Attribut
                         )
                         StageTwoContent = StageTwoResponse.choices[0].message.content
                         ClassificationMatch = re.search(
-                            r"Classification:\s*(Compliment|Feedback for Development)",
+                            r"(?im)^Classification\s*:\s*(Compliment|Feedback for Development)\b",
                             StageTwoContent,
-                            re.IGNORECASE,
                         )
                         if not ClassificationMatch:
                             raise ValueError("Stage two parsing failed")
