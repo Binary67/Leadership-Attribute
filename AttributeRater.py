@@ -84,9 +84,14 @@ def GetLeadershipAttributeRating(
         f"{SelectedDefinitions}\n\n"
         "If any behavior from 'Rating 5' appears, rate it a 5. "
         "If any behavior from 'Rating 1' appears, rate it a 1.\n\n"
-        "Respond in the following format:\n"
+        "Respond only with these lines:\n"
         "Rating: <number>\n"
         "Justification: <why this rating fits>"
+    )
+
+    SystemMessage = (
+        "You must answer with exactly the two fields shown and nothing else. "
+        "Do not add greetings, explanations, or punctuation around the rating."
     )
 
     AzureClient = AzureOpenAI(
@@ -100,7 +105,10 @@ def GetLeadershipAttributeRating(
     for Attempt in range(25):
         try:
             Response = AzureClient.chat.completions.create(
-                messages=[{"role": "user", "content": Prompt}],
+                messages=[
+                    {"role": "system", "content": SystemMessage},
+                    {"role": "user", "content": Prompt},
+                ],
                 model=DeploymentName,
                 temperature=0,
             )
@@ -111,10 +119,14 @@ def GetLeadershipAttributeRating(
             time.sleep(1)
     Content = Response.choices[0].message.content
 
-    RatingMatch = re.search(r"Rating:\s*(\d)", Content)
-    JustificationMatch = re.search(r"Justification:\s*(.*)", Content, re.DOTALL)
+    RatingMatch = re.search(r"(?im)Rating\s*[:=\-]*\s*([1-5])", Content)
+    JustificationMatch = re.search(
+        r"(?im)Justification\s*[:=\-]*\s*(.+)", Content, re.DOTALL
+    )
 
     RatingValue = int(RatingMatch.group(1)) if RatingMatch else 0
-    JustificationText = JustificationMatch.group(1).strip() if JustificationMatch else ""
+    JustificationText = (
+        JustificationMatch.group(1).strip(" \n\t.;:") if JustificationMatch else ""
+    )
 
     return RatingValue, JustificationText
