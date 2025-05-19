@@ -82,6 +82,8 @@ def GetLeadershipAttributeRating(
         f"Snippet: {RelevantSubstring}\n\n"
         "Rating Definitions:\n"
         f"{SelectedDefinitions}\n\n"
+        "If any behavior from 'Rating 5' appears, rate it a 5. "
+        "If any behavior from 'Rating 1' appears, rate it a 1.\n\n"
         "Respond in the following format:\n"
         "Rating: <number>\n"
         "Justification: <why this rating fits>"
