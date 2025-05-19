@@ -36,12 +36,17 @@ def EvaluateLeadershipFeedback(TalentFeedback: str, AttributeName: str, Attribut
     )
     DeploymentName = os.getenv("AZURE_OPENAI_DEPLOYMENT")
 
+    StageOneSystemMessage = (
+        "You must answer with the exact fields shown and nothing else. "
+        "Do not add greetings, explanations, or punctuation."
+    )
+
     StageOnePrompt = (
         f"You are assessing whether the following feedback is relevant to a leadership attribute.\n\n"
         f"Leadership Attribute: {AttributeName}\n"
         f"Definition: {AttributeDefinition}\n\n"
         f"Feedback:\n{TalentFeedback}\n\n"
-        "Respond in this format:\n"
+        "Respond only with these lines:\n"
         "Relevant: <Yes or No>\n"
         "Substring: <complete sentence or 'N/A'>"
     )
@@ -56,7 +61,10 @@ def EvaluateLeadershipFeedback(TalentFeedback: str, AttributeName: str, Attribut
             for StageOneAttempt in range(25):
                 try:
                     StageOneResponse = AzureClient.chat.completions.create(
-                        messages=[{"role": "user", "content": StageOnePrompt}],
+                        messages=[
+                            {"role": "system", "content": StageOneSystemMessage},
+                            {"role": "user", "content": StageOnePrompt},
+                        ],
                         model=DeploymentName,
                         temperature=0.2,
                     )
@@ -84,10 +92,15 @@ def EvaluateLeadershipFeedback(TalentFeedback: str, AttributeName: str, Attribut
             IsCompliment = False
 
             if IsRelevant and RelevantSubstring:
+                StageTwoSystemMessage = (
+                    "You must answer with the exact fields shown and nothing else. "
+                    "Do not add greetings, explanations, or punctuation."
+                )
                 StageTwoPrompt = (
-                    "Classify the following sentence from talent feedback as a compliment or feedback for development.\n\n"
+                    "Classify the following sentence from talent feedback as a"
+                    " compliment or feedback for development.\n\n"
                     f"Sentence: {RelevantSubstring}\n\n"
-                    "Respond in this format:\n"
+                    "Respond only with this line:\n"
                     "Classification: <Compliment or Feedback for Development>"
                 )
                 StageTwoResponse = None
@@ -95,7 +108,10 @@ def EvaluateLeadershipFeedback(TalentFeedback: str, AttributeName: str, Attribut
                 for StageTwoAttempt in range(25):
                     try:
                         StageTwoResponse = AzureClient.chat.completions.create(
-                            messages=[{"role": "user", "content": StageTwoPrompt}],
+                            messages=[
+                                {"role": "system", "content": StageTwoSystemMessage},
+                                {"role": "user", "content": StageTwoPrompt},
+                            ],
                             model=DeploymentName,
                             temperature=0.2,
                         )
