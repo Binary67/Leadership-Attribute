@@ -32,7 +32,7 @@ def _LoadRatingDefinitions(FilePath: str = "AttributeRatingSystem.yaml") -> dict
     return RatingData
 
 
-_RATING_DATA = _LoadRatingDefinitions()
+RatingData = _LoadRatingDefinitions()
 
 
 async def GetLeadershipAttributeRating(
@@ -65,7 +65,7 @@ async def GetLeadershipAttributeRating(
     if not IsRelevant:
         return 0, "Feedback not relevant to the attribute."
 
-    AttributeDefinitions = _RATING_DATA.get(AttributeName)
+    AttributeDefinitions = RatingData.get(AttributeName)
     if not AttributeDefinitions:
         raise ValueError(f"Attribute '{AttributeName}' not found in rating system.")
 
