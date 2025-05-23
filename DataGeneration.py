@@ -26,16 +26,16 @@ def GenerateDummyData(dict_LeadershipAttribute):
         "Demonstrates exceptional capability in leading cross-functional teams",
         "Shows remarkable ability to navigate complex organizational challenges",
         "Consistently delivers results while maintaining strong team morale",
-        "Excellent at developing and mentoring team members",
-        "Displays outstanding strategic thinking and planning abilities"
+        # "Excellent at developing and mentoring team members",
+        # "Displays outstanding strategic thinking and planning abilities"
     ]
     
     DevelopmentFeedbacks = [
         "Could benefit from enhancing delegation skills",
         "Would be more effective with improved conflict resolution approaches",
         "Has opportunity to grow in providing constructive feedback",
-        "Should focus on developing more strategic long-term vision",
-        "Would benefit from more active listening in team discussions"
+        # "Should focus on developing more strategic long-term vision",
+        # "Would benefit from more active listening in team discussions"
     ]
     
     # Combine positive and development feedback
@@ -46,9 +46,9 @@ def GenerateDummyData(dict_LeadershipAttribute):
     for EachFeedback in AllFeedbacks:
         for AttributeName, AttributeDefinition in dict_LeadershipAttribute.items():
             rows.append({
-                'Talent Feedback': EachFeedback,
-                'Attribute Name': AttributeName,
-                'Attribute Definition': AttributeDefinition
+                'feedback_extracted': EachFeedback,
+                'AttributeName': AttributeName,
+                'AttributeDefinition': AttributeDefinition
             })
     
     # Create DataFrame

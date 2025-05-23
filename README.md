@@ -2,6 +2,21 @@
 
 Identify leadership‑related strengths and development areas in qualitative talent feedback at scale.
 
+## 🔧 Setup
+
+1. Create a `.env` file in the project root with your Azure OpenAI credentials:
+```
+AZURE_OPENAI_API_KEY=your_api_key_here
+AZURE_OPENAI_ENDPOINT=your_endpoint_here
+AZURE_OPENAI_API_VERSION=2024-02-01
+AZURE_OPENAI_DEPLOYMENT=your_deployment_name
+```
+
+2. Install required dependencies:
+```bash
+pip install python-dotenv openai pandas numpy tqdm
+```
+
 ---
 
 ## ✨ What this project does
@@ -76,3 +91,20 @@ flowchart TD
     class B,E decision;
     class D,F,G,H,I,J process;
     class Start,End,Output,C terminal;
+```
+
+---
+
+## 🚀 Recent Improvements
+
+### Async Azure OpenAI Implementation (Latest)
+- **Replaced multithreading with async/await pattern**: Converted from `concurrent.futures.ThreadPoolExecutor` to native async operations using `asyncio`
+- **Enhanced API efficiency**: Now uses `AsyncAzureOpenAI` client for non-blocking I/O operations
+- **Maintained robust error handling**: Preserved the 25-attempt retry logic with exponential backoff using `asyncio.sleep()`
+- **Improved performance**: Async operations are more efficient for I/O-bound tasks like API calls, reducing overhead compared to thread-based concurrency
+
+### Technical Changes
+1. **FeedbackAnalyzer.py**: Converted to async with `AsyncAzureOpenAI` client
+2. **AttributeRater.py**: Converted to async with `AsyncAzureOpenAI` client  
+3. **main.py**: Replaced `ThreadPoolExecutor` with `asyncio.gather()` for concurrent execution
+4. **Progress tracking**: Updated to use `tqdm.asyncio` for async-compatible progress bars

@@ -1,10 +1,13 @@
 # Implementation of rating evaluation for leadership feedback
 import os
 import re
-import time
+import asyncio
 from typing import Tuple
-from openai import AzureOpenAI
+from openai import AsyncAzureOpenAI
+from dotenv import load_dotenv
 
+# Load environment variables from .env file
+load_dotenv()
 
 def _LoadRatingDefinitions(FilePath: str = "AttributeRatingSystem.yaml") -> dict:
     """Parse rating definitions from YAML-like file."""
@@ -32,7 +35,7 @@ def _LoadRatingDefinitions(FilePath: str = "AttributeRatingSystem.yaml") -> dict
 _RATING_DATA = _LoadRatingDefinitions()
 
 
-def GetLeadershipAttributeRating(
+async def GetLeadershipAttributeRating(
     CompleteFeedback: str,
     AttributeName: str,
     IsRelevant: bool,
@@ -94,7 +97,7 @@ def GetLeadershipAttributeRating(
         "Do not add greetings, explanations, or punctuation around the rating."
     )
 
-    AzureClient = AzureOpenAI(
+    AzureClient = AsyncAzureOpenAI(
         api_key=os.getenv("AZURE_OPENAI_API_KEY"),
         api_version=os.getenv("AZURE_OPENAI_API_VERSION"),
         azure_endpoint=os.getenv("AZURE_OPENAI_ENDPOINT"),
@@ -104,7 +107,7 @@ def GetLeadershipAttributeRating(
     Response = None
     for Attempt in range(25):
         try:
-            Response = AzureClient.chat.completions.create(
+            Response = await AzureClient.chat.completions.create(
                 messages=[
                     {"role": "system", "content": SystemMessage},
                     {"role": "user", "content": Prompt},
@@ -116,7 +119,7 @@ def GetLeadershipAttributeRating(
         except Exception as Error:
             if Attempt == 24:
                 raise
-            time.sleep(1)
+            await asyncio.sleep(1)
     Content = Response.choices[0].message.content
 
     RatingMatch = re.search(r"(?im)Rating\s*[:=\-]*\s*([1-5])", Content)

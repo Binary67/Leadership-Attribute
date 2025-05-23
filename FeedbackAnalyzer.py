@@ -1,10 +1,13 @@
 import os
 import re
-import time
-from openai import AzureOpenAI
+import asyncio
+from openai import AsyncAzureOpenAI
+from dotenv import load_dotenv
 
+# Load environment variables from .env file
+load_dotenv()
 
-def EvaluateLeadershipFeedback(TalentFeedback: str, AttributeName: str, AttributeDefinition: str):
+async def EvaluateLeadershipFeedback(TalentFeedback: str, AttributeName: str, AttributeDefinition: str):
     """Evaluate feedback relevance and tone using a single Azure OpenAI call.
 
     The function checks whether ``TalentFeedback`` is relevant to ``AttributeName``
@@ -28,7 +31,7 @@ def EvaluateLeadershipFeedback(TalentFeedback: str, AttributeName: str, Attribut
         ``RelevantSubstring`` extracted from the feedback, and ``IsCompliment``
         (``True`` for compliment, ``False`` for development).
     """
-    AzureClient = AzureOpenAI(
+    AzureClient = AsyncAzureOpenAI(
         api_key=os.getenv("AZURE_OPENAI_API_KEY"),
         api_version=os.getenv("AZURE_OPENAI_API_VERSION"),
         azure_endpoint=os.getenv("AZURE_OPENAI_ENDPOINT"),
@@ -54,14 +57,14 @@ def EvaluateLeadershipFeedback(TalentFeedback: str, AttributeName: str, Attribut
     for OverallAttempt in range(25):
         try:
             CombinedResponse = None
-            CombinedContent = None
+            CombinedContent = 'Default Message'
             IsRelevant = False
             RelevantSubstring = ""
             IsCompliment = False
 
             for CombinedAttempt in range(25):
                 try:
-                    CombinedResponse = AzureClient.chat.completions.create(
+                    CombinedResponse = await AzureClient.chat.completions.create(
                         messages=[
                             {"role": "system", "content": CombinedSystemMessage},
                             {"role": "user", "content": CombinedPrompt},
@@ -93,13 +96,12 @@ def EvaluateLeadershipFeedback(TalentFeedback: str, AttributeName: str, Attribut
                     break
                 except Exception as Error:
                     if CombinedAttempt == 24:
-                        return 'Error', 'Error', 'Error', CombinedContent
-                    time.sleep(1)
-
-            return IsRelevant, RelevantSubstring, IsCompliment
+                        return 'Error', 'Error', 'Error', Error
+                    await asyncio.sleep(2)
+            return IsRelevant, RelevantSubstring, IsCompliment, CombinedContent
         except Exception as Error:
             if OverallAttempt == 24:
-                return 'Error', 'Error', 'Error', CombinedContent
-            time.sleep(1)
+                return 'Error', 'Error', 'Error', Error
+            await asyncio.sleep(2)
 
-    return 'Error', 'Error', 'Error', CombinedContent
+    return 'Error', 'Error', 'Error', Error

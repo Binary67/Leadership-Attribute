@@ -1,20 +1,30 @@
 import os
-from concurrent.futures import ThreadPoolExecutor
-from openai import AzureOpenAI
+import asyncio
+from openai import AsyncAzureOpenAI
 import pandas as pd
 import numpy as np
 import random
 import re
+from tqdm.asyncio import tqdm as atqdm
 from tqdm import tqdm
 import warnings
 from typing import Tuple
 from FeedbackAnalyzer import EvaluateLeadershipFeedback
 from AttributeRater import _LoadRatingDefinitions, GetLeadershipAttributeRating
+from DataGeneration import GenerateDummyData
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 warnings.filterwarnings("ignore")
 tqdm.pandas()
 
-Data = pd.read_csv('your_data.csv')
+client = AsyncAzureOpenAI(
+  azure_endpoint = os.getenv("AZURE_OPENAI_ENDPOINT"), 
+  api_key = os.getenv("AZURE_OPENAI_API_KEY"),  
+  api_version = "2024-05-01-preview"
+)
 
 dict_27Attributes = {
     'Ambiguity & Tolerance': 'Comfortable with uncertainty, unpredictability, conflicting directions, and multiple demands. May be challenged to work in a structured environment.',
@@ -46,59 +56,18 @@ dict_27Attributes = {
     'Trusting': 'Believes in others and what they say. May be perceived as easily deceivable.',
     }
 
-def ExpandTalentFeedback(DataFrameInput: pd.DataFrame,
-                          AttributeDict: Dict[str, str]) -> pd.DataFrame:
-    """
-    Take a one-column dataframe (column name: 'talent_feedback') and
-    a dictionary of leadership attributes → definition, then
 
-    1. Add two new columns: AttributeName and AttributeDefinition.
-    2. Replicate each feedback row 27 times (once per attribute),
-       so every piece of feedback is paired with every attribute.
-    3. Return the expanded dataframe.
-
-    Parameters
-    ----------
-    DataFrameInput : pd.DataFrame
-        Must contain a column called 'talent_feedback'.
-    AttributeDict : Dict[str, str]
-        Keys are attribute names, values are attribute definitions.
-        Expected length: 27, but the function works for any size.
-
-    Returns
-    -------
-    pd.DataFrame
-        Original columns + AttributeName + AttributeDefinition,
-        with len(DataFrameInput) × len(AttributeDict) rows.
-    """
-
-    AttributeNames = list(AttributeDict.keys())
-    AttributeDefinitions = list(AttributeDict.values())
-
-    ExpandedDF = (
-        DataFrameInput.copy()
-        .assign(
-            AttributeName=[AttributeNames] * len(DataFrameInput),
-            AttributeDefinition=[AttributeDefinitions] * len(DataFrameInput)
-        )
-        # explode will replicate rows: one per list element
-        .explode(["AttributeName", "AttributeDefinition"], ignore_index=True)
-    )
-
-    return ExpandedDF
-  
-
-Data = ExpandTalentFeedback(Data, dict_27Attributes)
+Data = GenerateDummyData(dict_27Attributes)
 
 
-def EvaluateRow(Row: dict) -> Tuple[bool, str, bool]:
-    return EvaluateLeadershipFeedback(
+async def EvaluateRow(Row: dict) -> Tuple[bool, str, bool]:
+    return await EvaluateLeadershipFeedback(
         Row["feedback_extracted"], Row["AttributeName"], Row["AttributeDefinition"]
     )
 
 
-def RateRow(Row: dict) -> Tuple[int, str]:
-    return GetLeadershipAttributeRating(
+async def RateRow(Row: dict) -> Tuple[int, str]:
+    return await GetLeadershipAttributeRating(
         Row["feedback_extracted"],
         Row["AttributeName"],
         Row["IsRelevant"],
@@ -107,23 +76,31 @@ def RateRow(Row: dict) -> Tuple[int, str]:
     )
 
 
-with ThreadPoolExecutor() as Executor:
-    EvaluationResults = list(
-        tqdm(Executor.map(EvaluateRow, Data.to_dict("records")), total=len(Data))
+async def ProcessData():
+    # Process evaluation phase
+    EvaluationTasks = [EvaluateRow(Row) for Row in Data.to_dict("records")]
+    EvaluationResults = await atqdm.gather(*EvaluationTasks, desc="Evaluating feedback")
+    
+    Data[["IsRelevant", "RelevantSubstring", "IsCompliment", 'ModelContent']] = pd.DataFrame(
+        EvaluationResults,
+        columns=["IsRelevant", "RelevantSubstring", "IsCompliment", 'ModelContent'],
+    )
+    
+    _RATING_DATA = _LoadRatingDefinitions()
+    
+    # Process rating phase
+    RatingTasks = [RateRow(Row) for Row in Data.to_dict("records")]
+    RatingResults = await atqdm.gather(*RatingTasks, desc="Rating feedback")
+    
+    Data[["Rating", "Justification"]] = pd.DataFrame(
+        RatingResults, columns=["Rating", "Justification"]
     )
 
-Data[["IsRelevant", "RelevantSubstring", "IsCompliment"]] = pd.DataFrame(
-    EvaluationResults,
-    columns=["IsRelevant", "RelevantSubstring", "IsCompliment"],
-)
+    Data.to_csv('output/TalentData.csv', index = False)
+    
+    return Data
 
-_RATING_DATA = _LoadRatingDefinitions()
 
-with ThreadPoolExecutor() as Executor:
-    RatingResults = list(
-        tqdm(Executor.map(RateRow, Data.to_dict("records")), total=len(Data))
-    )
-
-Data[["Rating", "Justification"]] = pd.DataFrame(
-    RatingResults, columns=["Rating", "Justification"]
-)
+# Run the async processing
+if __name__ == "__main__":
+    asyncio.run(ProcessData())
